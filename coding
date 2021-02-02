@@ -1,1 +1,19 @@
+K-fold cross-validation
+k=4 #몇개의 fold
+num_validation_samples=len(data) // k #validation sample에 몇개를 쓴지
+np.random.shuffle(data) #data random shuffling
+valdation_scores=[] #validation score를 4번에 걸쳐 구하면서 여기에 지정
+for fold in range(k): #for문으로 fold를 4개를 돌리면서, training data는 validation set말고 다른 3개를 합쳐서 한다.
+    validation_data=data[num_validation_samples * fold: num_validation_samples * (fold+1)]
+    training_data=data[:num_validation_samples * fold] + data[num_validation_samples * (fold+1):]
+    
+    model=get_model()
+    model.train(training_data)
+    validation_score=model.evaluate(validation_data)
+    validation_scores.append(validation_score)
 
+validation_score=np.average(validation_scores) #최종 score는 validation_scores에 있는 값들을 평균내서 한다.
+
+model=get_model()
+model.train(data)
+test_score=model.evaluate(test_data)
