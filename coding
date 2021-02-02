@@ -1,4 +1,5 @@
 Hold out validation
+
 import numpy as np
 
 num_validation_samples=10000
@@ -45,18 +46,39 @@ Original model
 from keras import models
 from keras import layers
 
-model=model.Sequential()
-model.add(layers.Dense(16,activation='relu',input_shape=(10000,)))
-model.add(layers.Dense(16,activation='relu'))
-model.add(layers.Dense(1,activation='sigmoid'))
+original_model=model.Sequential()
+original_model.add(layers.Dense(16,activation='relu',input_shape=(10000,)))
+original_model.add(layers.Dense(16,activation='relu'))
+original_model.add(layers.Dense(1,activation='sigmoid'))
 
+original_model.compile(optimizer='rmsprop',
+                       loss='binary_crossentropy',
+                       metrics=['acc'])
+
+original model train
+
+original_hist=original_model.fit(x_train,y_train,
+                                 epochs=20,
+                                 batch_size=512,
+                                 validation_data=(x_test,y_test))
+								 
 Version of the model with lower capacity¶
 
-model=model.Sequential()
-model.add(layers.Dense(4,activation='relu',input_shape=(10000,)))
-model.add(layers.Dense(4,activation='relu'))
-model.add(layers.Dense(1,activation='sigmoid'))
+smaller_model=model.Sequential()
+smaller_model.add(layers.Dense(4,activation='relu',input_shape=(10000,)))
+smaller_model.add(layers.Dense(4,activation='relu'))
+smaller_model.add(layers.Dense(1,activation='sigmoid'))
 
+smaller_model.compile(optimizer='rmsprop',
+                       loss='binary_crossentropy',
+                       metrics=['acc'])
+
+smaller model train
+smaller_hist=smaller_model.fit(x_train,y_train,
+                                 epochs=20,
+                                 batch_size=512,
+                                 validation_data=(x_test,y_test))
+								 
 Listing 4.4 Version of the model with lower capacity
 
 model=model.Sequential()
