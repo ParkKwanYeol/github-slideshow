@@ -28,3 +28,16 @@ toc=time.time()
 print(c)
 print("For loop:"+str(1000*(toc-tic))+"ms")
 
+Vecetors and matrix valued fuctions
+
+u=np.zeros((n,1))
+for i in range(n):
+    u[i]=math.exp(v[i])
+	
+import numpy as np
+u=np.exp(v)
+
+np.log(v)
+np.abs(v)
+np.maximum(v,0)
+
